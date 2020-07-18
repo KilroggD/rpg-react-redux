@@ -16,9 +16,30 @@ const GameLoop = ({children, character, move}) => {
     const width = MAP_DIMENSIONS.COLS * TILE_SIZE;
     const height = MAP_DIMENSIONS.ROWS * TILE_SIZE;
 
-    useEffect(() => {
-        setCtx(canvasRef.current.getContext('2d'));
-    }, [setCtx]);
+    const moveCharacter = useCallback((e) => {
+        const key = e.key;
+        const [x,y] = MOVE_DIRECTIONS[key];
+        if (!checkMapCollision(character.x + x, character.y + y)) { 
+            move([x, y]);
+        }
+    }, [move, character.x, character.y]);
+
+    const tick = useCallback(() => {
+        const canvas = canvasRef.current;
+        ctx && ctx.clearRect(0, 0, width, height);
+        setCtx(null);
+        setCtx(canvas.getContext('2d'));            
+        loopRef.current = requestAnimationFrame(tick);
+    }, [ctx, setCtx, height, width]);
+
+    useEffect(() => {      
+        document.addEventListener('keypress', moveCharacter);
+        loopRef.current = requestAnimationFrame(tick);
+        return () => {
+            loopRef.current && cancelAnimationFrame(loopRef.current);
+            document.removeEventListener('keypress', moveCharacter);
+        }
+    }, [loopRef, tick, moveCharacter])
     
     return (
         <CanvasContext.Provider value={ctx}>
