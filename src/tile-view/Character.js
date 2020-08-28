@@ -2,7 +2,8 @@ import React, {useEffect, useContext, useRef} from 'react';
 import {connect} from 'react-redux';
 
 import CanvasConext from './canvasContext';
-import {HEROES_SPRITE, HERO_IMAGE_SIZE, HERO_CLASSES_MAP, TILE_SIZE} from './constants';
+import {HEROES_SPRITE, HERO_IMAGE_SIZE, HERO_CLASSES_MAP} from '../constants';
+import {TILE_SIZE} from './constants';
 import {bufferImage} from './slices/characterSlice';
 import {loadCharacter} from './slices/statusSlice';
 
@@ -12,7 +13,7 @@ const Character = ({x, y, heroClass, heroImg, loadCharacter, bufferImage}) => {
 
     useEffect(() => {
         if (heroImg) {
-            const {sx, sy} = HERO_CLASSES_MAP[heroClass];
+            const {sx, sy} = HERO_CLASSES_MAP[heroClass].icon;
             ctx.drawImage(
                 document.querySelector(heroImg),
                 sx,

@@ -14,15 +14,6 @@ export const MAP_TILE_IMAGES = {
     5: 'assets/map/stone_2_brown1.png',
 };
 
-export const HEROES_SPRITE  = 'assets/heroes/heroes.png';
-
-export const HERO_IMAGE_SIZE = 32;
-
-export const HERO_CLASSES_MAP = {
-    // TBD
-    FLAME_SWORDSMAN: {sx: 0, sy: 0},
-};
-
 export const LAYERS = [
     [
         [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,],

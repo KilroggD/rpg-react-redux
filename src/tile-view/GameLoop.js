@@ -18,9 +18,11 @@ const GameLoop = ({children, character, move}) => {
 
     const moveCharacter = useCallback((e) => {
         const key = e.key;
-        const [x,y] = MOVE_DIRECTIONS[key];
-        if (!checkMapCollision(character.x + x, character.y + y)) { 
-            move([x, y]);
+        if (MOVE_DIRECTIONS[key]) {
+            const [x,y] = MOVE_DIRECTIONS[key];
+            if (!checkMapCollision(character.x + x, character.y + y)) { 
+                move([x, y]);
+            }
         }
     }, [move, character.x, character.y]);
 
