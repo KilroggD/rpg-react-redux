@@ -20,6 +20,7 @@ const Grid = ({width, height, children}) => {
             ctx.lineTo(x, height);
             ctx.stroke();
         } 
+        return () => ctx && ctx.clearRect(0, 0, ctx.width, ctx.height);
     }, [ctx, height, width]);
 
     return children;
