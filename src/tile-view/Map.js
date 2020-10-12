@@ -12,6 +12,7 @@ const Map = ({ loadMap }) => {
     const {COLS, ROWS} = MAP_DIMENSIONS;
 
     useEffect(() => {
+        console.log('map effect');
         const drawLayer = grid => {
             for (let i = 0; i < ROWS; i++) {
                 for (let j = 0; j < COLS; j++) {

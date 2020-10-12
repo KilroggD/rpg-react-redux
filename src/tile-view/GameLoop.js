@@ -38,13 +38,16 @@ const GameLoop = ({children, character, move}) => {
         loopRef.current = requestAnimationFrame(tick);
     }, [isUpdateRequired, setIsVisible, setIsUpdateRequired]);
 
-    useEffect(() => {   
+    useEffect(() => {
         setCtx(canvasRef.current.getContext('2d'));
+    }, [setCtx]);
+
+    useEffect(() => {   
         loopRef.current = requestAnimationFrame(tick);
         return () => {
             loopRef.current && cancelAnimationFrame(loopRef.current);
         }
-    }, [loopRef, tick, setCtx])
+    }, [loopRef, tick])
 
     useEffect(() => {
         document.addEventListener('keypress', moveCharacter);
